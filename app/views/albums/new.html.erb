@@ -1,0 +1,8 @@
+<h1>Albums#new</h1>
+<p>Find me in app/views/albums/new.html.erb</p>
+
+<%= form_for @album do |f| %>
+  <p>The hashtag to be searched</p>
+  <%= f.text_field :title %>
+  <%= f.submit %>
+<%- end -%>

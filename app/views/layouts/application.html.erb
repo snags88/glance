@@ -10,9 +10,10 @@
 <body>
 
 <%- if signed_in? -%>
+  <%= current_user.nickname %>
   <%= link_to "Sign out", signout_path %>
 <%- else -%>
-  <%= link_to "Sign in w/ Instagram", signin_path %>
+  <%= link_to "Sign in w/ Instagram", oauth_path %>
 <%- end -%>
 
 <%= yield %>

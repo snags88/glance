@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if !signed_in?
-      redirect_to sign_in_path
+      redirect_to signin_path
     end
   end
 end
