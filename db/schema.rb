@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503011544) do
+ActiveRecord::Schema.define(version: 20150503182951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "album_users", force: :cascade do |t|
+    t.integer  "album_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "album_users", ["album_id"], name: "index_album_users_on_album_id", using: :btree
+  add_index "album_users", ["user_id"], name: "index_album_users_on_user_id", using: :btree
 
   create_table "albums", force: :cascade do |t|
     t.string   "title"
@@ -22,16 +32,6 @@ ActiveRecord::Schema.define(version: 20150503011544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "contributors", force: :cascade do |t|
-    t.integer  "album_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "contributors", ["album_id"], name: "index_contributors_on_album_id", using: :btree
-  add_index "contributors", ["user_id"], name: "index_contributors_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.text     "caption"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20150503011544) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "contributors", "albums"
-  add_foreign_key "contributors", "users"
+  add_foreign_key "album_users", "albums"
+  add_foreign_key "album_users", "users"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
 end

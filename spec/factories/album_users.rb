@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :contributor do
+  factory :album_user do
     album nil
 user nil
   end

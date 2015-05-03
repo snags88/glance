@@ -1,4 +1,4 @@
-class Contributor < ActiveRecord::Base
+class AlbumUser < ActiveRecord::Base
   belongs_to :album
   belongs_to :user
 end

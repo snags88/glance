@@ -13,6 +13,7 @@ gem 'pg'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-instagram'
+gem 'instagram'
 
 group :test, :development do
   gem 'rspec-rails'

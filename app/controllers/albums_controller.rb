@@ -11,9 +11,10 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    raise params.inspect
-    @album = Album.new(album_params, owner: current_user)
-    @album.build_contributors(contributor_params)
+    @album = Album.build_with_owner(album_params, current_user)
+    @new = @album.build_contributors(contributor_params[:names])
+    @album.build_photos
+    binding.pry
     if @album.save
       redirect_to @album
     else
