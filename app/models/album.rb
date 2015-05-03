@@ -11,15 +11,29 @@ class Album < ActiveRecord::Base
   def build_photos
     client = Instagram.client(access_token: self.owner.token)
     client.tag_recent_media(self.title).each do |media|
-      if allowed_nicknames.include?(media[:user][:username])
-        save_photo
+      if allowed_nicknames.include?(media[:user][:username]) && media[:type] == "image"
+        # find if photo exists and if it's already part of album
+
+        # create if it does not
+        Photo.new.tap do |photo|
+          photo.caption = media[:caption][:text]
+          photo.media_url = media[:images][:standard_resolution][:url]
+          photo.type = media[:type]
+          photo.insta_id = media[:id]
+          photo.latitude = media[:location][:latitude]
+          photo.longitude = media[:location][:longitude]
+          photo.location_name = media[:location][:name]
+          photo.posted_time = Time.at(media[:created_time].to_i).utc
+          photo.album = self
+          photo.user = User.find_by(:uid => instagram_user[:id])
+        end
       end
     end
   end
 
   def build_contributors(usernames)
     client = Instagram.client(access_token: self.owner.token)
-    a = usernames.collect do |username|
+    usernames.collect do |username|
       if username != ""
         user = client.user_search(username).first
         if user
