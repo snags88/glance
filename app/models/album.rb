@@ -12,8 +12,8 @@ class Album < ActiveRecord::Base
     client = Instagram.client(access_token: self.owner.token)
     client.tag_recent_media(self.title).each do |media|
       if allowed_nicknames.include?(media[:user][:username]) && media[:type] == "image"
-        # find if photo exists and if it's already part of album
-
+        # find if photo exists and is already part of album
+        Photo.where(:insta_id => media[:id], :album_id => self)
         # create if it does not
         Photo.new.tap do |photo|
           photo.caption = media[:caption][:text]
@@ -25,8 +25,9 @@ class Album < ActiveRecord::Base
           photo.location_name = media[:location][:name]
           photo.posted_time = Time.at(media[:created_time].to_i).utc
           photo.album = self
-          photo.user = User.find_by(:uid => instagram_user[:id])
+          photo.user = User.find_by(:uid => media[:user][:id])
         end
+
       end
     end
   end
