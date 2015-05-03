@@ -3,6 +3,11 @@
 
 <%= form_for @album do |f| %>
   <p>The hashtag to be searched</p>
-  <%= f.text_field :title %>
+  <%= f.text_field :title %></br>
+  <p>Users to be included</p>
+  <input type="text" name="contributor[names][]"></input>
+  <input type="text" name="contributor[names][]"></input>
+  <input type="text" name="contributor[names][]"></input>
+  <br>
   <%= f.submit %>
 <%- end -%>

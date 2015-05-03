@@ -11,8 +11,9 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    @album = Album.new(album_params)
-    @album.owner = current_user
+    raise params.inspect
+    @album = Album.new(album_params, owner: current_user)
+    @album.build_contributors(contributor_params)
     if @album.save
       redirect_to @album
     else
@@ -41,5 +42,9 @@ class AlbumsController < ApplicationController
 
     def album_params
       params.require(:album).permit(:title)
+    end
+
+    def contributor_params
+      params.require(:contributor).permit(:names => [])
     end
 end
