@@ -10,7 +10,7 @@ class Album < ActiveRecord::Base
 
   def build_photos
     client = Instagram.client(access_token: self.owner.token)
-    client.tag_recent_media(self.title, count: 100).each do |media|
+    client.tag_recent_media(self.title, count: 33).each do |media|
       if allowed_nicknames.include?(media[:user][:username]) && media[:type] == "image"
         if Photo.where(:insta_id => media[:id], :album_id => self).empty?
         # create if it does not

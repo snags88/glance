@@ -12,7 +12,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.build_with_owner(album_params, current_user)
-    @new = @album.build_contributors(contributor_params[:names])
+    @album.build_contributors(contributor_params[:names])
     if @album.save
       redirect_to @album
     else

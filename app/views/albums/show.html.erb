@@ -3,6 +3,9 @@
 
 <img src="<%= @album.owner.image %>">
 <p>@<%= @album.owner.nickname %></p>
+<%- @album.contributors.each do |contributor| -%>
+  <p>@<%= contributor.nickname %></p>
+<%- end -%>
 
 <h2><%= @album.title %></h2>
 
@@ -10,7 +13,7 @@
 
   <%= image_tag photo.media_url %><br>
   <p><%= photo.caption %></p>
-  <p>Photo taken at: <%= photo.location_name %>(<%= "#{photo.latitude}, #{photo.longitude}" %>)</p>
+  <p>Photo taken at: <%= photo.location_name %>(<%= "#{photo.latitude}, #{photo.longitude}" %>) on <%= photo.posted_time %></p>
 
 <%- end -%>
 
