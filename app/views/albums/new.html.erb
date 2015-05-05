@@ -1,13 +1,4 @@
 <h1>Albums#new</h1>
 <p>Find me in app/views/albums/new.html.erb</p>
 
-<%= form_for @album do |f| %>
-  <p>The hashtag to be searched</p>
-  <%= f.text_field :title %></br>
-  <p>Users to be included</p>
-  <input type="text" name="contributor[names][]"></input>
-  <input type="text" name="contributor[names][]"></input>
-  <input type="text" name="contributor[names][]"></input>
-  <br>
-  <%= f.submit %>
-<%- end -%>
+<%= render 'form', album: @album %>

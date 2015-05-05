@@ -1,0 +1,13 @@
+<%= form_for album do |f| %>
+  <p>The hashtag to be searched</p>
+  <%= f.text_field :title %></br>
+  <p>Users to be included</p>
+  <div id="contributors">
+    <input type="text" name="contributor[names][]"></input>
+  </div>
+  <a href="#" id="add_contributor">Add Another Contributor (+)</a>
+  <a href="#" id="remove_contributor">Remove Contributor (-)</a>
+
+  <br>
+  <%= f.submit %>
+<%- end -%>
