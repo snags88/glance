@@ -3,6 +3,9 @@
   <%= f.text_field :title %></br>
   <p>Users to be included</p>
   <div id="contributors">
+    <%- album.contributors.each do |contributor| -%>
+      <%= text_field_tag "contributor[names][]", contributor.nickname %>
+    <%- end -%>
     <input type="text" name="contributor[names][]"></input>
   </div>
   <a href="#" id="add_contributor">Add Another Contributor (+)</a>

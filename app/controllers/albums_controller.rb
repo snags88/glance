@@ -25,6 +25,9 @@ class AlbumsController < ApplicationController
   end
 
   def edit
+    #update album title
+    #update contributors (destroy previous add new)
+    #update any photo changes
   end
 
   def update
