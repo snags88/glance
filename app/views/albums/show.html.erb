@@ -9,14 +9,13 @@
 
 <h2><%= @album.title %></h2>
 
-<%- @album.photos.each do |photo| -%>
-
+<%- chronological_photos(@album).each do |photo| -%>
   <%= image_tag photo.media_url %><br>
   <p><%= photo.caption %></p>
-  <p>Photo taken at: <%= photo.location_name %>(<%= "#{photo.latitude}, #{photo.longitude}" %>) on <%= photo.posted_time %></p>
-
+  <p>Photo taken at: <%= photo.location_name %> (<%= "#{photo.latitude}, #{photo.longitude}" %>) on <%= photo.posted_time %></p>
 <%- end -%>
 
 
 <%= link_to "Edit Album", edit_album_path(@album) %><br>
 <%= link_to "Delete Album", @album, method: :delete %><br>
+
