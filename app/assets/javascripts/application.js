@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree ../../../vendor/assets/javascripts/.
+//= require d3
+//= require d3.geo.zoom.js
 //= require_tree .
