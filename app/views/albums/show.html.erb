@@ -18,6 +18,7 @@
   <input type="button" value="Fly to <%= photo.location_name %>" data-coordinates="<%="[#{photo.latitude}, #{photo.longitude}]"  %>" data-location="<%= photo.location_name %>" data-src="<%= photo.media_url %>"  class="button"><br>
 <%- end -%>
 
-
-<%= link_to "Edit Album", edit_album_path(@album) %><br>
-<%= link_to "Delete Album", @album, method: :delete %><br>
+<%- if @album.owner == current_user -%>
+  <%= link_to "Edit Album", edit_album_path(@album) %><br>
+  <%= link_to "Delete Album", @album, method: :delete %><br>
+<%- end -%>

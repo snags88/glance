@@ -2,11 +2,16 @@
 <p>Find me in app/views/albums/index.html.erb</p>
 
 <h2>My Albums</h2>
-<%- @my_albums.each do |album| -%>
+<%- @albums.each do |album| -%>
   <p><%= link_to album.title, album %></p>
 <%- end -%>
 
 <%= link_to "New", new_album_path %>
+
+<h2>Albums I'm in</h2>
+<%- @contributions.each do |contribution| -%>
+  <p><%= link_to contribution.title, contribution %></p>
+<%- end -%>
 
 
 

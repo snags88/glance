@@ -1,6 +1,7 @@
 $(function(){
+  replaceClickEvent('#remove_contributor', Form.removeContributor);
+  replaceClickEvent('#add_contributor', Form.addContributor);
   Form.linkManager();
-  $('#add_contributor').on('click', Form.addContributor);
 })
 
 var Form = {
@@ -16,7 +17,7 @@ var Form = {
     Form.linkManager();
   },
   linkManager: function(){
-    if($('#contributors input').size()  === 2 && $(".disabled")[0]){
+    if($('#contributors input').size()  === 2 && $("a.disabled")[0]){
       $('#remove_contributor').removeClass("disabled");
       replaceClickEvent('#remove_contributor', Form.removeContributor)
     }

@@ -3,7 +3,8 @@ class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
 
   def index
-    @my_albums = Album.where(owner_id: current_user)
+    @albums = current_user.albums
+    @contributions = current_user.contributions
   end
 
   def new
@@ -13,11 +14,7 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.build_with_owner(album_params, current_user)
     @album.build_contributors(contributor_params[:names])
-    if @album.save
-      redirect_to @album
-    else
-      render 'new'
-    end
+    @album.save ? (redirect_to @album) : (render 'new')
   end
 
   def show
@@ -25,12 +22,13 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    #update album title
-    #update contributors (destroy previous add new)
-    #update any photo changes
+    #TODO allow add/remove of photos
   end
 
   def update
+    @album.update_title(album_params)
+    @album.update_contributors(contributor_params[:names])
+    @album.save ? (redirect_to @album) : (render 'new')
   end
 
   def destroy

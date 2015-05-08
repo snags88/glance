@@ -1,4 +1,8 @@
 <h1>Albums#edit</h1>
-<p>Add photos by searching users/tag</p>
+<p>Edit album information</p>
 
+<p>if title is updated, then it will remove all previous photos and search for new ones.</p>
+<p>if contributors are removed, their photos will be deleted from the album</p>
 <%= render 'form', album: @album %>
+
+<%= link_to "Cancel", @album %>

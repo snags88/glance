@@ -46,6 +46,11 @@ class Album < ActiveRecord::Base
     end.compact
   end
 
+  def remove_contributors(usernames)
+    AlbumUser.joins(:user).where(:album_id => self, :users => {:nickname => usernames}).destroy_all
+    Photo.joins(:user).where(:album_id => self, :users => {:nickname => usernames}).destroy_all
+  end
+
   def allowed_nicknames
     (contributors + [owner]).collect(&:nickname).uniq
   end
@@ -54,5 +59,23 @@ class Album < ActiveRecord::Base
     album = Album.new(album_params)
     album.owner = user
     album
+  end
+
+  def update_contributors(usernames)
+    contributors = self.contributors.pluck(:nickname)
+    added = []
+    removed = contributors.dup
+    usernames.each do |username|
+      contributors.include?(username) ? removed.delete(username) : added << username
+    end
+    build_contributors(added)
+    remove_contributors(removed)
+  end
+
+  def update_title(album_params)
+    if self.title != album_params[:title]
+      Photo.where(:album_id => self).destroy_all
+      self.update(album_params)
+    end
   end
 end

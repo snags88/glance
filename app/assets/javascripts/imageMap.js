@@ -1,5 +1,5 @@
 $(function(){
-  if($('.earth_div')[0]){
+  if($('#earth_div')[0]){
     earth = new WE.map('earth_div', Map.options);
     Map.layer.addTo(earth);
     Markers.placeAll
