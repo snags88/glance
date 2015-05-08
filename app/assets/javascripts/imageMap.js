@@ -1,8 +1,10 @@
 $(function(){
+  if($('.earth_div')[0]){
     earth = new WE.map('earth_div', Map.options);
     Map.layer.addTo(earth);
     Markers.placeAll
     $(".button").on("click", panTo)
+  }
 });
 
 var Map = new function() {
@@ -27,6 +29,7 @@ var panTo = function() {
         var coords = $(this).data("coordinates")
         earth.panTo(coords);
         var marker = WE.marker(coords).addTo(earth);
+
         var location = $(this).data("location");
         var src = $(this).data("src");
 
