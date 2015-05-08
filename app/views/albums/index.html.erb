@@ -8,25 +8,5 @@
 
 <%= link_to "New", new_album_path %>
 
- <style>
-    html,body,#worldmap{
-      height:100%;
-    }
-  </style>
 
 
-<div id="worldmap"></div>
-  <script>
-
-
-
-  // create a map object and set the view to the coordinates 44,-31 with a zoom of 10
-  var map = L.map('worldmap').setView([51.505, -0.09], 13);
-
-    L.tileLayer('http://{s}.tiles.mapbox.com/v4/snags88.f17d4012/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic25hZ3M4OCIsImEiOiIyNHRGdHRzIn0.9kvD8k6z9Ib6j5H9NiuDBg', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18
-}).addTo(map);
-
-
-  </script>
