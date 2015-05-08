@@ -9,13 +9,13 @@
 
 <h2><%= @album.title %></h2>
 
-<div id="earth_div" style="width:600px;height:400px;border:1px solid gray; padding:2px;"></div>
+<div id="earth_div" style="width:800px;height:600px;border:1px solid gray; padding:2px;"></div>
 
 <%- chronological_photos(@album).each do |photo| -%>
 <!--   <%= image_tag photo.media_url %><br>
   <p><%= photo.caption %></p>
-  <p>Photo taken at: <%= photo.location_name %> (<%= ", " %>) on <%= photo.posted_time %></p> -->
-  <input type="button" value="Fly to <%= photo.location_name %>" onclick="panTo([<%= "#{photo.latitude}, #{photo.longitude}"%>]);"%><br>
+  <p>Photo taken at: <%= photo.location_name %> on <%= photo.posted_time %></p> -->
+  <input type="button" value="Fly to <%= photo.location_name %>" data-coordinates="<%="[#{photo.latitude}, #{photo.longitude}]"  %>" data-location="<%= photo.location_name %>" data-src="<%= photo.media_url %>"  class="button"><br>
 <%- end -%>
 
 
