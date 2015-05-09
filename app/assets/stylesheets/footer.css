@@ -1,0 +1,36 @@
+.push {
+  height: 200px;
+}
+
+.creator {
+  padding-top: 5px;
+  font-size: 16px;
+  color: #323232;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.create-header {
+  color: #888;
+}
+
+#creator-name {
+  font-size: 16px;
+  color: #323232;
+}
+
+.social a,
+.social a:link,
+.social a:visited,
+.social a:hover,
+.social a:active {
+  text-decoration: none;
+  color: #323232;
+}
+
+.footer ul.social li {
+  margin-right: 2px;
+}

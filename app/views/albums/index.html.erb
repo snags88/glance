@@ -1,17 +1,29 @@
-<h1>Albums#index</h1>
-<p>Find me in app/views/albums/index.html.erb</p>
+<section class="inner-intro bg-img14 overlay-light parallax parallax-background2">
+  <div class="container">
+    <div class="row title">
+      <h2 class="h2">Albums</h2>
+    </div>
+  </div>
+</section>
+<div class="clearfix"></div>
 
-<h2>My Albums</h2>
-<%- @albums.each do |album| -%>
-  <p><%= link_to album.title, album %></p>
-<%- end -%>
-
-<%= link_to "New", new_album_path %>
-
-<h2>Albums I'm in</h2>
-<%- @contributions.each do |contribution| -%>
-  <p><%= link_to contribution.title, contribution %></p>
-<%- end -%>
+<section class="ptb ptb-sm-80">
+  <div class="container">
+    <div class="row">
+      <ul class="container-filter categories-filter">
+        <li><a class="categories active" data-filter="*">All</a></li>
+        <li><a class="categories" data-filter=".my_albums">Mine</a></li>
+        <li><a class="categories" data-filter=".tagged_albums">Tagged</a></li>
+        <li><%= link_to "New", new_album_path %></li>
+      </ul>
+    </div>
+    <div class="row container-grid nf-col-3">
+      <%= render partial: 'albums/preview', collection: @albums, as: :album, locals: {:type => "my_albums"} %>
+      <%= render partial: 'albums/preview', collection: @contributions, as: :album, locals: {:type => "tagged_albums"}%>
+    </div>
+  </div>
+</section>
+<div class="clearfix"></div>
 
 
 

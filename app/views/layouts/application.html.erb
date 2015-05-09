@@ -7,16 +7,20 @@
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
 </head>
-<body>
+  <body class="full-intro">
 
-<%- if signed_in? -%>
-  <%= current_user.nickname %>
-  <%= link_to "Sign out", signout_path %>
-<%- else -%>
-  <%= link_to "Sign in w/ Instagram", oauth_path %>
-<%- end -%>
+    <section id="preloader">
+        <div class="loader" id="loader">
+            <div class="loader-img"></div>
+        </div>
+    </section>
 
-<%= yield %>
+    <%= render "layouts/sidemenu/menu" %>
 
-</body>
+    <div class="wrapper">
+      <%= render "layouts/header" %>
+      <%= yield %>
+      <%= render "layouts/footer" %>
+    </div>
+  </body>
 </html>

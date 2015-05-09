@@ -1,0 +1,20 @@
+#profile-image-container {
+  width: 125px;
+  margin: 15px auto;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+  margin-bottom: 20px;
+}
+
+.greeting {
+  text-align: center;
+}
+
+.side-menu div.sign-in {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
