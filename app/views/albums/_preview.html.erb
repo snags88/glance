@@ -1,7 +1,7 @@
 <div class="nf-item <%= type %> spacing">
   <div class="item-box">
-    <%= link_to album, :class => "cbox-gallary1" do %>
-      <img alt="1" src="<%= album.photos.last.media_url %>" class="item-container">
+    <%= link_to album do %>
+      <img alt="1" src="<%= album.photos.sample.media_url %>" class="item-container">
       <div class="item-mask">
         <div class="item-caption">
           <h5 class="white"><%= album.title %></h5>
