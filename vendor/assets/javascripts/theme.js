@@ -105,10 +105,18 @@ function header() {
         if ($(this).scrollTop() > 1) {
             $('.header').addClass("sticky");
             $('.inner-intro').css('z-index', '-1');
+            if($('.home')[0]) {
+                $('div#menu-button i').css('color', '#323232');
+                $('.logo h3').css('color', '#323232');
+            }
         }
         else {
             $('.header').removeClass("sticky");
             $('.inner-intro').css('z-index', 'auto');
+            if($('.home')[0]) {
+                $('div#menu-button i').css('color', '#fff');
+                $('.logo h3').css('color', '#fff');
+            }
         }
     });
     heightElement();
@@ -465,6 +473,7 @@ function containerGridMasonry() {
     // Gria Element
     if ($(this).length > 0) {
         // ISOTOPE MASONRY ELEMENT  ||--------------
+
         var $container = $('.container-masonry').isotope({
             itemSelector: '.nf-item',
             layoutMode: 'masonry',
@@ -473,6 +482,21 @@ function containerGridMasonry() {
                 gutter: 0
             },
         });
+
+        $container.imagesLoaded( function() {
+          $container.isotope('layout');
+        });
+        // var $container = $('.container-masonry').imagesLoaded(function(){
+        //     $container.isotope({
+        //         itemSelector: '.nf-item',
+        //         layoutMode: 'masonry',
+        //         masonry: {
+        //             columnWidth: 0,
+        //             gutter: 0
+        //         },
+        //     });
+        // });
+
         // bind filter button click
         $('.container-filter').on('click', '.categories', function () {
             var filterValue = $(this).attr('data-filter');
@@ -483,8 +507,17 @@ function containerGridMasonry() {
         var $container2 = $('.container-grid').isotope({
             itemSelector: '.nf-item',
             layoutMode: 'fitRows'
-
         });
+        $container2.imagesLoaded( function() {
+          $container2.isotope('layout');
+        });
+        // var $container2 = $('.container-grid').imagesLoaded(function(){
+        //     $container2.isotope({
+        //         itemSelector: '.nf-item',
+        //         layoutMode: 'fitRows'
+        //     });
+        // });
+
 
         // bind filter categories click
         $('.container-filter').on('click', '.categories', function () {

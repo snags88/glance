@@ -1,9 +1,9 @@
-<section class="full-screen-intro">
+<section class="full-screen-intro home">
   <!-- add background image -->
-  <div class="media-wapper bg-img8 cont-h-100per"></div>
+  <div class="media-wapper cont-h-100per" style="background-size: cover !important; background-position: center center;  background-image: url('<%= asset_path 'home.jpg' %>');"></div>
 
   <div class="full-cap-wraper overlay-dark light-color">
-    <div class="content-caption light-color parallax parallax-opacity">
+    <div class="content-caption light-color">
       <div class="container">
         <h2 class="h2">[glance]</h2>
         <div class="row">
@@ -12,7 +12,10 @@
         <br>
         <div>
           <a class="btn btn-md btn-white-line xs-hidden">Read More</a>
-          <span class="btn-space-10 xs-hidden"></span><a class="btn btn-md btn-white"><i class="fa fa-instagram"></i>Login</a>
+          <span class="btn-space-10 xs-hidden"></span>
+          <%= link_to oauth_path, :class => "btn btn-md btn-white" do %>
+            <i class="fa fa-instagram"></i>Login
+          <%- end -%>
         </div>
       </div>
     </div>
@@ -78,21 +81,48 @@
 </section>
 <div class="clearfix"></div>
 
-<section id="contant" class="ptb ptb-sm-80">
+<section id="content" class="ptb ptb-sm-80">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 mb-sm-30">
-        <!-- add a grid of preset images -->
+    <div class="col-md-6">
+      <div class="container-grid nf-col-2">
+        <div class="nf-item">
+          <div class="item-box">
+            <a href="#">
+              <img src="<%= image_path 'greatwall.jpg' %>" class="item-container">
+            </a>
+          </div>
+        </div>
+        <div class="nf-item">
+          <div class="item-box">
+            <a href="#">
+              <img src="<%= image_path 'city.jpg' %>" class="item-container">
+            </a>
+          </div>
+        </div>
+        <div class="nf-item">
+          <div class="item-box">
+            <a href="#">
+              <img src="<%= image_path 'beach.jpg' %>" class="item-container">
+            </a>
+          </div>
+        </div>
+        <div class="nf-item">
+          <div class="item-box">
+            <a href="#">
+              <img src="<%= image_path 'walking.jpg' %>" class="item-container">
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="col-md-5 col-md-offset-1">
-        <div class="spacer-30"></div>
-        <h3>Discover</h3>
-        <div class="spacer-15"></div>
-        <p>Search and browse albums from other travellers to see breathtaking photos. Geotagged pictures can become your inspiration for your next travel plans.</p>
-        <p>Discover beauty. Be inspired.</p>
-        <div class="spacer-15"></div>
-        <a class="btn btn-md btn-black">Get Started</a>
-      </div>
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+      <div class="spacer-30"></div>
+      <h3>Discover</h3>
+      <div class="spacer-15"></div>
+      <p>Search and browse albums from other travellers to see breathtaking photos. Geotagged pictures can become your inspiration for your next travel plans.</p>
+      <p>Discover beauty. Be inspired.</p>
+      <div class="spacer-15"></div>
+      <%= link_to "Get Started", oauth_path, :class => "btn btn-md btn-black" %>
     </div>
   </div>
 </section>
