@@ -18,3 +18,9 @@
   padding-top: 15px;
   padding-bottom: 10px;
 }
+
+.boundry {
+  height: 10px;
+  border-bottom: 1px solid #3e3e3e;
+  margin-bottom: 10px !important;
+}
