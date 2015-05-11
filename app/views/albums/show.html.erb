@@ -23,15 +23,12 @@
           </ul>
           <div class="ui-tab-content">
             <div id="tabs-gallery" class="plr-0">
-              <!-- render partial here -->
-              gallery
+              <%= render 'albums/show/gallery', album: @album %>
             </div>
             <div id="tabs-map" class="plr-0">
-              <!-- render partial here -->
-              map
+              <%= render 'albums/show/map', album: @album %>
             </div>
           </div>
-
 
         </div>
       </div>

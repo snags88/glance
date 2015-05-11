@@ -1,0 +1,13 @@
+<div class="row">
+  <ul class="container-filter categories-filter">
+    <li><a class="categories active" data-filter="*">All</a></li>
+    <li><a class="categories" data-filter=".<%= album.owner.nickname %>">@<%= album.owner.nickname %></a></li>
+    <%- album.contributors.each do |contributor| -%>
+    <li><a class="categories" data-filter=".<%= contributor.nickname %>">@<%= contributor.nickname %></a></li>
+    <%- end -%>
+  </ul>
+</div>
+
+<div class="row container-grid nf-col-3">
+  <%= render partial: 'albums/show/images', collection: chronological_photos(album), as: :photo %>
+</div>
