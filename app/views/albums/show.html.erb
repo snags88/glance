@@ -1,22 +1,41 @@
-<h1>Albums#show</h1>
-<p>This will become the map page</p>
-<p>@<%= @album.owner.nickname %></p>
-<%- @album.contributors.each do |contributor| -%>
-  <p>@<%= contributor.nickname %></p>
-<%- end -%>
+<section class="inner-intro bg-img24 overlay-dark">
+  <div class="container">
+    <div class="row title">
+      <h2 class="h2">#<%= @album.title %></h2>
+    </div>
+  </div>
+</section>
+<div class="clearfix"></div>
 
-<h2><%= @album.title %></h2>
+<section class="ptb ptb-sm-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-4 mt-xs-30">
+        <%= render 'albums/sidebar/contributors', album: @album %>
+        <%= show_edit_menu(@album) %>
+      </div>
 
-<div id="earth_div" style="width:800px;height:600px;border:1px solid gray; padding:2px;"></div>
+      <div class="col-md-9 col-sm-8">
+        <div class="tabs b-lrb-none">
+          <ul>
+            <li><a href="#tabs-gallery"><i class="ion ion-images left"></i>Gallery</a></li>
+            <li><a href="#tabs-map"><i class="ion ion-map left"></i>Map</a></li>
+          </ul>
+          <div class="ui-tab-content">
+            <div id="tabs-gallery" class="plr-0">
+              <!-- render partial here -->
+              gallery
+            </div>
+            <div id="tabs-map" class="plr-0">
+              <!-- render partial here -->
+              map
+            </div>
+          </div>
 
-<%- chronological_photos(@album).each do |photo| -%>
-<!--   <%= image_tag photo.media_url %><br>
-  <p><%= photo.caption %></p>
-  <p>Photo taken at: <%= photo.location_name %> on <%= photo.posted_time %></p> -->
-  <input type="button" value="Fly to <%= photo.location_name %>" data-coordinates="<%="[#{photo.latitude}, #{photo.longitude}]"  %>" data-location="<%= photo.location_name %>" data-src="<%= photo.media_url %>"  class="button"><br>
-<%- end -%>
 
-<%- if @album.owner == current_user -%>
-  <%= link_to "Edit Album", edit_album_path(@album) %><br>
-  <%= link_to "Delete Album", @album, method: :delete %><br>
-<%- end -%>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

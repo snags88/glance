@@ -1,0 +1,10 @@
+<div class="sidebar-widget">
+  <h5>Contributors</h5>
+  <hr>
+  <ul>
+      <li>@<%= album.owner.nickname %></li>
+      <%- album.contributors.each do |contributor| -%>
+      <li>@<%= contributor.nickname %></li>
+      <%- end -%>
+  </ul>
+</div>

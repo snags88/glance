@@ -17,7 +17,7 @@
         <li><%= link_to "New", new_album_path %></li>
       </ul>
     </div>
-    <div class="row container-grid nf-col-3">
+    <div class="row container-grid nf-col-3 display-container">
       <%= render partial: 'albums/preview', collection: @albums, as: :album, locals: {:type => "my_albums"} %>
       <%= render partial: 'albums/preview', collection: @contributions, as: :album, locals: {:type => "tagged_albums"}%>
     </div>
