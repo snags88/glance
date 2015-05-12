@@ -26,9 +26,10 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    @album.update_title(album_params)
+    @album.update_album(album_params)
     @album.update_contributors(contributor_params[:names])
-    @album.save ? (redirect_to @album) : (render 'new')
+    binding.pry
+    @album.save ? (redirect_to @album) : (render 'edit')
   end
 
   def destroy
@@ -42,7 +43,7 @@ class AlbumsController < ApplicationController
     end
 
     def album_params
-      params.require(:album).permit(:title)
+      params.require(:album).permit(:title, :public)
     end
 
     def contributor_params

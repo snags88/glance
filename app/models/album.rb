@@ -7,6 +7,7 @@ class Album < ActiveRecord::Base
   has_many :contributors, through: :album_users, source: :user
 
   validates :title, presence: true
+  validates :public, inclusion: [true, false]
 
   def build_photos
     client = Instagram.client(access_token: self.owner.token)
@@ -72,10 +73,8 @@ class Album < ActiveRecord::Base
     remove_contributors(removed)
   end
 
-  def update_title(album_params)
-    if self.title != album_params[:title]
-      Photo.where(:album_id => self).destroy_all
-      self.update(album_params)
-    end
+  def update_album(album_params)
+    Photo.where(:album_id => self).destroy_all if self.title != album_params[:title]
+    self.update(album_params)
   end
 end
