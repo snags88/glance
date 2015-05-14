@@ -7,7 +7,7 @@ $(function(){
 var Form = {
   addContributor: function(e){
     stopAction(e);
-    var $inputField = $('#contributors input').first().clone().val("");
+    var $inputField = $('#contributors input').last().clone().val("");
     $('#contributors').append($inputField);
     Form.linkManager();
   },

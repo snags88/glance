@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
-
+  skip_before_action :authenticate_user!, only: [:show]
   before_action :set_album, only: [:show, :edit, :update, :destroy]
+  before_action :shared_album, only: [:show]
 
   def index
     @albums = current_user.albums
@@ -47,5 +48,9 @@ class AlbumsController < ApplicationController
 
     def contributor_params
       params.require(:contributor).permit(:names => [])
+    end
+
+    def shared_album
+      authenticate_user! if params[:p] != self.token
     end
 end

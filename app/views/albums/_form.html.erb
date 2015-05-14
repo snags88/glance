@@ -1,21 +1,31 @@
 <%= form_for album do |f| %>
-  <p>The hashtag to be searched</p>
-  <%= f.text_field :title %></br>
-  <p>Users to be included</p>
-  <div id="contributors">
-    <%- album.contributors.each do |contributor| -%>
-      <%= text_field_tag "contributor[names][]", contributor.nickname %>
-    <%- end -%>
-    <input type="text" name="contributor[names][]"></input>
+  <div class="form-group">
+    <%= f.label :title, "Album Title", class: "control-label" %>
+    <span>(The hashtag to be searched)</span>
+    <%= f.text_field :title, class: "form-control input-sm" %>
   </div>
-  <a href="#" id="add_contributor">Add Another Contributor (+)</a>
-  <a href="#" id="remove_contributor">Remove Contributor (-)</a>
 
-  <p>Private/Public Album</p>
-  <%= f.radio_button :public, 'true' %>
-  <%= label :public_true, 'Public' %>
-  <%= f.radio_button :public, 'false' %>
-  <%= label :public_false, 'Private' %>
-  <br>
-  <%= f.submit %>
+  <div class="form-group">
+    <%= label_tag "Contributors" %>
+    <span>( <a href="#" id="add_contributor">Add [+]</a>/<a href="#" id="remove_contributor">Remove [-]</a> )</span>
+    <div id="contributors">
+      <%- album.contributors.each do |contributor| -%>
+        <%= text_field_tag "contributor[names][]", contributor.nickname, class: "input-sm contributor-input form-control" %>
+      <%- end -%>
+      <input type="text" name="contributor[names][]" class="input-sm contributor-input form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "Private/Public Album" %>
+    <div>
+      <%= f.radio_button :public, 'true', :checked => true %>
+      <%= label :public_true, 'Public', class: "radio-inline custom-radio" %>
+      <%= f.radio_button :public, 'false' %>
+      <%= label :public_false, 'Private', class: "radio-inline custom-radio" %>
+    </div>
+  </div>
+  <div class="spacer-15"></div>
+  <%= f.submit class: "btn btn-md btn-black" %>
+  <%= link_to "Cancel", :back, class: "btn btn-md btn-black-line " %>
 <%- end -%>

@@ -1,4 +1,5 @@
 class Album < ActiveRecord::Base
+  include Tokenable
 
   belongs_to :owner, class_name: "User"
   has_many :photos, dependent: :destroy

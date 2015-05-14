@@ -1,0 +1,25 @@
+input[type="radio"] {
+  appearance: radio !important;
+  -webkit-appearance: radio !important;
+}
+
+label.custom-radio {
+  padding: 0 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.btn-sm {
+  padding:6px 12px;
+  vertical-align: middle;
+}
+
+.contributor-input {
+  margin-right: 10px;
+}
+
+.note {
+  color: #888;
+  margin: 0;
+  margin-bottom: 35px;
+}
