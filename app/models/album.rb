@@ -22,9 +22,11 @@ class Album < ActiveRecord::Base
             photo.media_url = media[:images][:standard_resolution][:url]
             photo.kind = media[:type]
             photo.insta_id = media[:id]
-            photo.latitude = media[:location][:latitude]
-            photo.longitude = media[:location][:longitude]
-            photo.location_name = media[:location][:name]
+            if media[:location]
+              photo.latitude = media[:location][:latitude]
+              photo.longitude = media[:location][:longitude]
+              photo.location_name = media[:location][:name]
+            end
             photo.posted_time = Time.at(media[:created_time].to_i).utc
             photo.album = self
             photo.user = User.find_by(:uid => media[:user][:id])
