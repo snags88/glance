@@ -2,7 +2,10 @@
   <h5>Manage</h5>
   <hr>
   <ul>
-      <li><%= link_to "Update", edit_album_path(album) %></li>
-      <li><%= link_to "Delete", album, method: :delete %></li>
+    <%- if album.public -%>
+    <li>Share: <%= "#{request.protocol}#{request.host_with_port}/albums/#{album.id}?p=#{album.token}" %></li>
+    <%- end -%>
+    <li><%= link_to "Update", edit_album_path(album) %></li>
+    <li><%= link_to "Delete", album, method: :delete %></li>
   </ul>
 </div>

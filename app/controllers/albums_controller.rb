@@ -51,6 +51,6 @@ class AlbumsController < ApplicationController
     end
 
     def shared_album
-      authenticate_user! if params[:p] != self.token
+      authenticate_user! if (params[:p] != @album.token) || !(@album.public)
     end
 end
