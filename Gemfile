@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-instagram'
 gem 'instagram'
+gem 'friendly_id'
 
 group :test, :development do
   gem 'rspec-rails'

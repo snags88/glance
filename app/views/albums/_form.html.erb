@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <%= label_tag "Contributors" %>
-    <span>( <a href="#" id="add_contributor">Add [+]</a>/<a href="#" id="remove_contributor">Remove [-]</a> )</span>
+    <span><a href="#" id="add_contributor">Add [+]</a>/<a href="#" id="remove_contributor">Remove [-]</a></span>
     <div id="contributors">
       <%- album.contributors.each do |contributor| -%>
         <%= text_field_tag "contributor[names][]", contributor.nickname, class: "input-sm contributor-input form-control" %>

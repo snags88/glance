@@ -3,7 +3,7 @@
   <hr>
   <ul>
     <%- if album.public -%>
-    <li>Share: <%= "#{request.protocol}#{request.host_with_port}/albums/#{album.id}?p=#{album.token}" %></li>
+    <li>Share: <%= "#{request.protocol}#{request.host_with_port}/albums/#{album.slug}?p=#{album.token}" %></li>
     <%- end -%>
     <li><%= link_to "Update", edit_album_path(album) %></li>
     <li><%= link_to "Delete", album, method: :delete %></li>
