@@ -36,3 +36,4 @@ var panTo = function() {
         marker.bindPopup("<img src="+src+" width='150' height='150'><br><p>"+location+"</p>", {maxWidth: 150, closeButton: true}).openPopup();
 
       }
+
