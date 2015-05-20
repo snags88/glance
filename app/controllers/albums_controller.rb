@@ -23,12 +23,12 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    #TODO allow add/remove of photos
   end
 
   def update
     @album.update_album(album_params)
     @album.update_contributors(contributor_params[:names])
+    # TODO: add ability to update order of photos
     @album.save ? (redirect_to @album) : (render 'edit')
   end
 
