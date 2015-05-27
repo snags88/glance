@@ -1314,7 +1314,7 @@ h6,
 
 
 @media (min-width: 768px) {
-    
+
 }
 
 small,
@@ -2564,10 +2564,10 @@ th {
     .table > thead > tr > td,
     .table > tbody > tr > td,
     .table > tfoot > tr > td {
-        
+
         line-height: 1.42857143;
         vertical-align: top;
-        
+
     }
 
     .table > thead > tr > th {
@@ -5742,16 +5742,13 @@ a.thumbnail.active {
 }
 
 @-o-keyframes progress-bar-stripes {
-    from;
+    from {
+        background-position: 40px 0;
+    }
 
-{
-    background-position: 40px 0;
-}
-
-to {
-    background-position: 0 0;
-}
-
+    to {
+        background-position: 0 0;
+    }
 }
 
 @keyframes progress-bar-stripes {
