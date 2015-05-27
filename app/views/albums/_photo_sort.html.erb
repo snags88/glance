@@ -1,0 +1,5 @@
+<ul id="sortable">
+  <%- ordered_photos(album).each do |photo| -%>
+  <li class="ui-state-default"><%= photo.location_name %> | Order: <%= photo.order %></li>
+  <%- end -%>
+</ul>

@@ -1,0 +1,35 @@
+$(function(){
+  generateMap();
+
+})
+
+
+var generateMap = function(){
+  var map = L.map('leafmap').setView([37.788, 132.188], 3)
+    //, {
+    //center: [37.788, 132.188], //Initial geographical center of the map.
+    //zoom: 6, //Initial map zoom
+//    minZoom: 13, //Minimum zoom level of the map
+//    maxZoom: 3 //Maximum zoom level of the map
+    //Interaction Options
+  //});
+
+  L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+   {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'snags88.f17d4012',
+    accessToken: 'pk.eyJ1Ijoic25hZ3M4OCIsImEiOiIyNHRGdHRzIn0.9kvD8k6z9Ib6j5H9NiuDBg'
+  }).addTo(map);
+}
+//Map State modifications
+//setView( <LatLng> center,<Number> zoom?,<zoom/pan options> options? )
+//setZoom( <Number> zoom, <zoom options> options? )
+//panTo( <LatLng> latlng, <pan options> options? )
+//openPopup( <String> html | <HTMLElement> el, <LatLng> latlng, <Popup options> options? )
+
+//Makers
+//L.marker( <LatLng> latlng,<Marker options> options? )
+
+//MultiPolyLine
+//draw path between multiple points given coordinates

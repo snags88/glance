@@ -32,6 +32,7 @@ class Album < ActiveRecord::Base
             photo.posted_time = Time.at(media[:created_time].to_i).utc
             photo.album = self
             photo.user = User.find_by(:uid => media[:user][:id])
+            # Need to fix order when photos are pulled in
             photo.order = Photo.where(album: self).count + 1
           end
         end
