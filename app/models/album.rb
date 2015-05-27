@@ -32,6 +32,8 @@ class Album < ActiveRecord::Base
             photo.posted_time = Time.at(media[:created_time].to_i).utc
             photo.album = self
             photo.user = User.find_by(:uid => media[:user][:id])
+            # Need to fix order when photos are pulled in
+            photo.order = Photo.where(album: self).count + 1
           end
         end
       end
@@ -81,5 +83,15 @@ class Album < ActiveRecord::Base
   def update_album(album_params)
     Photo.where(:album_id => self).destroy_all if self.title != album_params[:title]
     self.update(album_params)
+  end
+
+  def update_order(order_params)
+    order_params[:tokens].split(',').each_with_index do |token, index|
+      #TODO: refactor for less querying
+      photo = Photo.find_by(:token => token)
+      photo.order = index + 1
+      photo.save
+    end
+    binding.pry
   end
 end

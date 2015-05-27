@@ -23,10 +23,11 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    #TODO allow add/remove of photos
   end
 
   def update
+    @album.update_order(order_params)
+    # TODO: add ability to update order of photos
     @album.update_album(album_params)
     @album.update_contributors(contributor_params[:names])
     @album.save ? (redirect_to @album) : (render 'edit')
@@ -48,6 +49,10 @@ class AlbumsController < ApplicationController
 
     def contributor_params
       params.require(:contributor).permit(:names => [])
+    end
+
+    def order_params
+      params.require(:order).permit(:tokens)
     end
 
     def shared_album

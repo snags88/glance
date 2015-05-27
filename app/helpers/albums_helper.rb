@@ -1,7 +1,7 @@
 module AlbumsHelper
 
-  def chronological_photos(album)
-    Photo.where(album_id: album).order(:posted_time)
+  def ordered_photos(album)
+    Photo.where(album_id: album).order(:order)
   end
 
   def show_edit_menu(album)

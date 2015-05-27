@@ -9,5 +9,5 @@
 </div>
 
 <div class="row container-grid nf-col-3">
-  <%= render partial: 'albums/show/images', collection: chronological_photos(album), as: :photo %>
+  <%= render partial: 'albums/show/images', collection: ordered_photos(album), as: :photo %>
 </div>
