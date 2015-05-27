@@ -19,7 +19,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album.build_photos
+    @album.build_photos if @album.owner == current_user
   end
 
   def edit
