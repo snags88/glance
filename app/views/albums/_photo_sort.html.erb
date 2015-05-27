@@ -1,5 +1,9 @@
-<ul id="sortable">
-  <%- ordered_photos(album).each do |photo| -%>
-  <li class="ui-state-default"><%= photo.location_name %> | Order: <%= photo.order %></li>
-  <%- end -%>
-</ul>
+<%= form_for album, :html => {id: "sortForm"} do |f| %>
+  <ul id="sortable">
+    <%- ordered_photos(album).each do |photo| -%>
+    <li class="ui-state-default" id="<%= photo.token %>"><%= photo.location_name %> | Order: <%= photo.order %></li>
+    <%- end -%>
+  </ul>
+  <input type="text" name="order[tokens]" id="orderSubmit">
+  <%= f.submit "Update" %>
+<%- end -%>

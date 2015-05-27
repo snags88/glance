@@ -84,4 +84,14 @@ class Album < ActiveRecord::Base
     Photo.where(:album_id => self).destroy_all if self.title != album_params[:title]
     self.update(album_params)
   end
+
+  def update_order(order_params)
+    order_params[:tokens].split(',').each_with_index do |token, index|
+      #TODO: refactor for less querying
+      photo = Photo.find_by(:token => token)
+      photo.order = index + 1
+      photo.save
+    end
+    binding.pry
+  end
 end

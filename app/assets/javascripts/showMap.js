@@ -1,10 +1,10 @@
-var map = L.map('map', {
-    center: , //Initial geographical center of the map.
-    zoom: , //Initial map zoom
-    minZoom: , //Minimum zoom level of the map
-    maxZoom: , //Maximum zoom level of the map
+// var map = L.map('map', {
+    // center: , //Initial geographical center of the map.
+    // zoom: , //Initial map zoom
+    // minZoom: , //Minimum zoom level of the map
+    // maxZoom: , //Maximum zoom level of the map
     //Interaction Options
-});
+// });
 
 //Map State modifications
 //setView( <LatLng> center,<Number> zoom?,<zoom/pan options> options? )

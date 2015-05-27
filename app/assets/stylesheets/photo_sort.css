@@ -12,4 +12,13 @@
   font-size: 1.4em;
   height: 35px;
   border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  cursor: hand;
+}
+
+#sortable li.ui-sortable-helper {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
 }
