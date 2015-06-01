@@ -26,8 +26,8 @@ class AlbumsController < ApplicationController
   end
 
   def update
+    #TODO: refactor
     @album.update_order(order_params)
-    # TODO: add ability to update order of photos
     @album.update_album(album_params)
     @album.update_contributors(contributor_params[:names])
     @album.save ? (redirect_to @album) : (render 'edit')
