@@ -1,7 +1,7 @@
 $(function() {
     $("#sortable").sortable();
     $("#sortable").disableSelection();
-    $("#sortForm").on("submit", photoSorter.submit)
+    $("#editForm").on("submit", photoSorter.submit)
 });
 
 var photoSorter = {

@@ -92,6 +92,5 @@ class Album < ActiveRecord::Base
       photo.order = index + 1
       photo.save
     end
-    binding.pry
   end
 end

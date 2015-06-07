@@ -1,4 +1,4 @@
-<%= form_for album do |f| %>
+<%= form_for album, :html => {id: "editForm"} do |f| %>
   <div class="form-group">
     <%= f.label :title, "Album Title", class: "control-label" %>
     <span>(The hashtag to be searched)</span>
@@ -25,6 +25,17 @@
       <%= label :public_false, 'Private', class: "radio-inline custom-radio" %>
     </div>
   </div>
+  <div class="form-group">
+    <%= label_tag "Sort Photos" %>
+
+    <ul id="sortable">
+      <%- ordered_photos(album).each do |photo| -%>
+      <li class="ui-state-default" id="<%= photo.token %>"><%= photo.location_name %> | Order: <%= photo.order %></li>
+      <%- end -%>
+    </ul>
+    <input type="text" name="order[tokens]" id="orderSubmit">
+  </div>
+
   <div class="spacer-15"></div>
   <%= f.submit class: "btn btn-md btn-black" %>
   <%= link_to "Cancel", :back, class: "btn btn-md btn-black-line " %>

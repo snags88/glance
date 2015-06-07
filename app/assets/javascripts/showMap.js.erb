@@ -1,8 +1,10 @@
 $(function(){
   // generateMap();
-
 })
 
+$(window).load(function() {
+ generateMap();
+});
 
 var generateMap = function(){
   var map = L.map('leafmap').setView([37.788, 132.188], 3)
