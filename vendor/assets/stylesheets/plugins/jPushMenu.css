@@ -1,6 +1,6 @@
 /* General styles for all menus */
 .cbp-spmenu {
-    
+
     position: fixed;
 }
 
@@ -14,7 +14,7 @@
     -moz-transition: all 0.3s ease 0s;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
-    
+
 }
 
 
@@ -25,7 +25,7 @@
     overflow: hidden;
     top: 0;
 
-    
+
 }
 
 
@@ -73,7 +73,7 @@
     overflow-x: hidden;
     position: relative;
     left: 0;
-    
+
 }
 
 .push-body-toright {
@@ -86,11 +86,11 @@
 
 .push-body-toleft {
     left: -270px;
-    
+
 }
 .push-body-totop {
     top: 64px;
-    
+
 
 }
 
@@ -100,5 +100,4 @@
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
 }
-
 

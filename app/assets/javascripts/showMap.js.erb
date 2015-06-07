@@ -1,9 +1,7 @@
 $(function(){
-  // generateMap();
-})
-
-$(window).load(function() {
- generateMap();
+  $("#map-tab-button").on('click',function() {
+   generateMap();
+  });
 });
 
 var generateMap = function(){

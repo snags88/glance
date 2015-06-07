@@ -1,10 +1,4 @@
-﻿@import url("navigation.css");
-@import url("./plugin/flexslider.css");
-@import url("./plugin/owl.carousel.css");
-@import url("./plugin/mediaelementplayer.css");
-@import url("./plugin/colorbox.css");
-@import url("./plugin/jquery.fs.tipper.css");
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
+﻿@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
 
 /*
 * BASIC STYLE
@@ -1427,19 +1421,19 @@ header.sticky .navigation a.current-ele {
         color: #323232;
     }
 
-    .full-intro .header {
+/*    .full-intro .header {
         background-color: rgba(255, 255, 255, 0.95);
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
         -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
         -o-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    }
+    }*/
 }
 
 @media (max-width: 991px) {
     /* HEADER STYLE ------------ */
     .header .side-menu-btn ul li, .header .mobile-menu-icon-wraper {
-        padding: 19px 0 20px;
+        padding: 29px 0 20px;
     }
 
     .header .logo a, .header.sticky .logo a {

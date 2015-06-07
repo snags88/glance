@@ -2,18 +2,12 @@
 <html>
 <head>
   <title>glance</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
 </head>
   <body class="full-intro">
-
-    <section id="preloader">
-        <div class="loader" id="loader">
-            <div class="loader-img"></div>
-        </div>
-    </section>
 
     <%= render "layouts/sidemenu/menu" %>
 

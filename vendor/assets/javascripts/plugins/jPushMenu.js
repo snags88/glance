@@ -71,16 +71,16 @@
             });
         }
 
-        // Close Side menu on clicking menu link 
+        // Close Side menu on clicking menu link
         if (o.closeOnClickLink) {
             $('.menu-close').on('click', function () {
                 jPushMenu.close(o);
                 $('body').removeClass('push-body-totop');
             });
         }
-        
 
-        
+
+
     };
 
    /*
