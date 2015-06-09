@@ -1,7 +1,7 @@
 <div class="nf-item <%= photo.user.nickname %> spacing">
   <div class="item-box">
   <a class="cbox-gallary1" href="<%= photo.media_url %>" title="<%= photo.location_name %>">
-      <img alt="1" src="<%= photo.media_url %>" class="item-container">
+      <img alt="1" src="<%= photo.media_url %>" class="item-container" data-lat="<%= photo.latitude %>" data-long="<%= photo.longitude %>">
       <div class="item-mask">
         <div class="item-caption">
           <h5 class="white"><%= photo.location_name %></h5>
