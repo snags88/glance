@@ -11,6 +11,7 @@ function openSite() {
   scroll();
   containerGridMasonry();
   photoSorter();
+  shortCodeElements();
 }
 
 //---------------------------------------
@@ -149,4 +150,25 @@ function jqueryUi() {
       $(".tabs").tabs();
     }
   });
+}
+
+// shortCode Script
+shortCodeElements();
+function shortCodeElements(){
+    lightbox();
+    function lightbox() {
+        $(".cbox-gallery1").colorbox({
+            rel: 'gallary',
+            maxWidth: "95%",
+            maxHeight: "95%"
+
+        });
+        $(".cbox-iframe").colorbox({
+            iframe: true,
+            maxWidth: "95%",
+            maxHeight: "95%",
+            innerWidth: 640,
+            innerHeight: 390
+        });
+    };
 }

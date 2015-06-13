@@ -15,10 +15,19 @@ var mapConfig = {
   }
 }
 
+var locations = {
+  afterLoad: function(){
+    this.getCoordinates();
+  },
+  getCoordinates: function(){
+    this["information"] = $(".item-box img").map(function(){return $(this).data();})
+  }
+}
+
 var generateMap = function(){
   var map = L.map('leafmap', {
     center: mapConfig.firstLocation(), //Initial geographical center of the map.
-    zoom: 6, //Initial map zoom
+    zoom: 2, //Initial map zoom
     minZoom: 2, //Minimum zoom level of the map
     maxZoom: 13, //Maximum zoom level of the map
     maxBounds: L.latLngBounds([[-180, -180],[180, 180]]),
@@ -38,23 +47,25 @@ var generateMap = function(){
   locations.information.each(function(){
     L.marker([this.lat, this.long], {icon:mapConfig.icon}).bindPopup(mapConfig.popupString(this)).addTo(map);
   });
-}
 
-var locations = {
-  afterLoad: function(){
-    this.getCoordinates();
-  },
-  getCoordinates: function(){
-    this["information"] = $(".item-box img").map(function(){return $(this).data();})
-  }
+  map.fitWorld();
 }
-
 
 $(function(){
   $("#map-tab-button").on('click',function() {
    generateMap();
    $(this).off();
   });
+
+  $("#map-prev").on('click', function(){
+    console.log("hello");
+  })
+  $("#map-all").on('click', function(){
+    console.log("hello");
+  })
+  $("#map-next").on('click', function(){
+    console.log("hello");
+  })
 
   locations.afterLoad();
 });
