@@ -133,7 +133,16 @@ function containerGridMasonry() {
 //---------------------------------------
 
 function photoSorter() {
-  $("#sortable").sortable();
+  $("#sortable").sortable({
+    start: function (event, ui) {
+      $(this).data("startingScrollTop",window.pageYOffset);
+    },
+    drag: function(event,ui){
+       var st = parseInt($(this).data("startingScrollTop"));
+       ui.position.top -= st;
+    },
+    scroll: true
+  });
   $("#sortable").disableSelection();
   $("#editForm").on("submit", function(e){
     $("#orderSubmit").val($("#sortable").sortable("toArray"))

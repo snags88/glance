@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  /*overflow: auto;*/
 }
 
 #sortable li {
@@ -15,6 +16,11 @@
   background-color: white;
   cursor: pointer;
   cursor: hand;
+  /*overflow: hidden;*/
+}
+
+.sortable-photo {
+  color: black;
 }
 
 #sortable li.ui-sortable-helper {

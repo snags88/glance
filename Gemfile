@@ -29,6 +29,7 @@ group :test, :development do
   gem 'guard-rspec', require: false
   gem 'thin'
   gem 'spring'
+  gem 'awesome_print'
 end
 
 group :production do

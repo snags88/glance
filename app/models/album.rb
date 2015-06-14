@@ -24,7 +24,7 @@ class Album < ActiveRecord::Base
             photo.media_url = media[:images][:standard_resolution][:url]
             photo.kind = media[:type]
             photo.insta_id = media[:id]
-            if media[:location]
+            if media[:location][:name]
               photo.latitude = media[:location][:latitude]
               photo.longitude = media[:location][:longitude]
               photo.location_name = media[:location][:name]

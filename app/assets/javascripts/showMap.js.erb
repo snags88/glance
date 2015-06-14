@@ -7,11 +7,35 @@ var mapConfig = {
     iconAnchor:   [12, 41],
     popupAnchor:  [1, -34]
   }),
+  baseLayer: L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'snags88.f17d4012',
+    accessToken: 'pk.eyJ1Ijoic25hZ3M4OCIsImEiOiIyNHRGdHRzIn0.9kvD8k6z9Ib6j5H9NiuDBg',
+    noWrap: true
+  }),
   popupString: function(photo){
     return "<div class =\"popup-div\"><b>" + photo.name + "</b><br><img src=" + photo.link + " class=\"map-image\"></div>";
   },
   firstLocation: function(){
-    return [locations.information[0].lat, locations.information[0].long];
+    return locations.information[0].latlong;
+  },
+  lineColor: 'red'
+}
+
+function Photo(lat, long, name, link){
+  this.latlong = L.latLng(lat, long);
+  this.name = name;
+  this.link = link;
+  this.marker = L.marker(this.latlong, {icon:mapConfig.icon}).bindPopup(mapConfig.popupString(this));
+}
+
+var mapMod = {
+  addToMap: function(object, map){object.addTo(map);},
+  addPolylines: function(latLongs, map) {
+    var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
+    this.addToMap(polyline, map);
+    return polyline;
   }
 }
 
@@ -20,7 +44,17 @@ var locations = {
     this.getCoordinates();
   },
   getCoordinates: function(){
-    this["information"] = $(".item-box img").map(function(){return $(this).data();})
+    var arr = $(".item-box img").map(function(i,e){
+      var o = $(this).data();
+      if(o.lat === ""){
+        return null;
+      } else {
+        return new Photo(o.lat, o.long, o.name, o.link);
+      }
+    });
+
+    arr.filter(function(e){ return e === 0 || e });
+    this["information"] = arr;
   }
 }
 
@@ -29,32 +63,40 @@ var generateMap = function(){
     center: mapConfig.firstLocation(), //Initial geographical center of the map.
     zoom: 2, //Initial map zoom
     minZoom: 2, //Minimum zoom level of the map
-    maxZoom: 13, //Maximum zoom level of the map
+    maxZoom: 17, //Maximum zoom level of the map
     maxBounds: L.latLngBounds([[-180, -180],[180, 180]]),
     // Interaction options
     worldCopyJump: true
   });
-
-  L.tileLayer('https://{s}.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-   {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'snags88.f17d4012',
-    accessToken: 'pk.eyJ1Ijoic25hZ3M4OCIsImEiOiIyNHRGdHRzIn0.9kvD8k6z9Ib6j5H9NiuDBg',
-    noWrap: true
-  }).addTo(map);
-
-  locations.information.each(function(){
-    L.marker([this.lat, this.long], {icon:mapConfig.icon}).bindPopup(mapConfig.popupString(this)).addTo(map);
-  });
-
+  mapMod.addToMap(mapConfig.baseLayer, map);
   map.fitWorld();
+  return map;
 }
 
+var cleanedLatLongs = function(latLngs){
+  var array = [], i
+  for(i = 0; i < latLngs.length; i++){
+    array.push(latLngs[i]);
+  }
+  return array
+}
+
+
 $(function(){
+  locations.afterLoad();
+
   $("#map-tab-button").on('click',function() {
-   generateMap();
-   $(this).off();
+    var map = generateMap();
+    // need to massage latlongs to remove null ones and add wrapping points
+    var latLongs = locations.information.map(function(){return this.latlong})
+    // latLongs = cleanedLatLongs(latLongs);
+
+    mapMod.addPolylines(latLongs, map);
+
+    locations.information.each(function(){
+      mapMod.addToMap(this.marker, map);
+    })
+    $(this).off();
   });
 
   $("#map-prev").on('click', function(){
@@ -67,7 +109,6 @@ $(function(){
     console.log("hello");
   })
 
-  locations.afterLoad();
 });
 
 //Map State modifications
@@ -75,9 +116,3 @@ $(function(){
 //setZoom( <Number> zoom, <zoom options> options? )
 //panTo( <LatLng> latlng, <pan options> options? )
 //openPopup( <String> html | <HTMLElement> el, <LatLng> latlng, <Popup options> options? )
-
-//Markers
-//L.marker( <LatLng> latlng,<Marker options> options? )
-
-//MultiPolyLine
-//draw path between multiple points given coordinates

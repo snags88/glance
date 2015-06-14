@@ -3,9 +3,9 @@
   <hr>
   <ul>
     <%- if album.public -%>
-    <li>Share: <%= "#{request.protocol}#{request.host_with_port}/albums/#{album.slug}?p=#{album.token}" %></li>
+    <li><i class="ion ion-share"></i> Share: <%= "#{request.protocol}#{request.host_with_port}/albums/#{album.slug}?p=#{album.token}" %></li>
     <%- end -%>
-    <li><%= link_to "Update", edit_album_path(album) %></li>
-    <li><%= link_to "Delete", album, method: :delete %></li>
+    <li><i class="ion ion-edit"></i> <%= link_to "Update", edit_album_path(album) %></li>
+    <li><i class="ion ion-trash-a"></i> <%= link_to "Delete", album, method: :delete %></li>
   </ul>
 </div>
