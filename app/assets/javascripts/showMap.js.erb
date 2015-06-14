@@ -40,6 +40,7 @@ var mapMod = {
 }
 
 var locations = {
+  currentLocation: 0,
   afterLoad: function(){
     this.getCoordinates();
   },
@@ -55,6 +56,58 @@ var locations = {
 
     arr.filter(function(e){ return e === 0 || e });
     this["information"] = arr;
+  },
+  next: function(map, markerPathLayer){
+    if(this.currentLocation === 0){
+      markerPathLayer.clearLayers();
+    }
+    this.currentLocation++;
+
+    map.removeLayer(markerPathLayer);
+    var path = this.information.slice(0, this.currentLocation)
+
+    var latLongs = path.map(function(){return this.latlong})
+    var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
+    var markers = path.map(function(){return this.marker})
+
+    markerPathLayer = L.layerGroup(markers).addLayer(polyline);
+    markerPathLayer.addTo(map);
+
+    return markerPathLayer;
+
+  },
+  prev: function(map, markerPathLayer){
+    if(this.currentLocation > 0){
+      this.currentLocation--;
+
+      map.removeLayer(markerPathLayer);
+      var path = this.information.slice(0, this.currentLocation)
+
+      var latLongs = path.map(function(){return this.latlong})
+      var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
+      var markers = path.map(function(){return this.marker})
+
+      markerPathLayer = L.layerGroup(markers).addLayer(polyline);
+      markerPathLayer.addTo(map);
+    }
+
+    return markerPathLayer;
+  },
+  all: function(map, markerPathLayer){
+    if(markerPathLayer){
+      this.currentLocation = 0;
+      map.removeLayer(markerPathLayer);
+      markerPathLayer.clearLayers();
+    }
+
+    // need to massage latlongs to remove null ones and add wrapping points
+    var latLongs = this.information.map(function(){return this.latlong})
+    var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
+    var markers = this.information.map(function(){return this.marker})
+
+    markerPathLayer = L.layerGroup(markers).addLayer(polyline);
+    markerPathLayer.addTo(map);
+    return markerPathLayer
   }
 }
 
@@ -68,7 +121,7 @@ var generateMap = function(){
     // Interaction options
     worldCopyJump: true
   });
-  mapMod.addToMap(mapConfig.baseLayer, map);
+  mapConfig.baseLayer.addTo(map);
   map.fitWorld();
   return map;
 }
@@ -81,33 +134,27 @@ var cleanedLatLongs = function(latLngs){
   return array
 }
 
-
 $(function(){
+  var map, markerPathLayer
+
   locations.afterLoad();
 
   $("#map-tab-button").on('click',function() {
-    var map = generateMap();
-    // need to massage latlongs to remove null ones and add wrapping points
-    var latLongs = locations.information.map(function(){return this.latlong})
-    // latLongs = cleanedLatLongs(latLongs);
+    map = generateMap();
+    markerPathLayer = locations.all(map, markerPathLayer);
 
-    mapMod.addPolylines(latLongs, map);
-
-    locations.information.each(function(){
-      mapMod.addToMap(this.marker, map);
-    })
     $(this).off();
-  });
 
-  $("#map-prev").on('click', function(){
-    console.log("hello");
-  })
-  $("#map-all").on('click', function(){
-    console.log("hello");
-  })
-  $("#map-next").on('click', function(){
-    console.log("hello");
-  })
+    $("#map-prev").on('click', function(){
+      markerPathLayer = locations.prev(map, markerPathLayer);
+    })
+    $("#map-all").on('click', function(){
+      markerPathLayer = locations.all(map, markerPathLayer);
+    })
+    $("#map-next").on('click', function(){
+      markerPathLayer = locations.next(map, markerPathLayer);
+    })
+  });
 
 });
 
