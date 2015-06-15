@@ -20,7 +20,10 @@ var mapConfig = {
   firstLocation: function(){
     return locations.information[0].latlong;
   },
-  lineColor: 'red'
+  lineColor: 'red',
+  panOptions: {
+    duration: 2
+  }
 }
 
 function Photo(lat, long, name, link){
@@ -32,10 +35,13 @@ function Photo(lat, long, name, link){
 
 var mapMod = {
   addToMap: function(object, map){object.addTo(map);},
-  addPolylines: function(latLongs, map) {
-    var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
-    this.addToMap(polyline, map);
-    return polyline;
+  animateView: function(photos, map){
+    var coords =  photos[photos.length-1].latlong;
+    map.setView(coords, 6, {pan: mapConfig.panOptions, animate: true});
+  },
+  openImage: function(photos, map){
+    var marker = photos[photos.length-1].marker;
+    marker.openPopup();
   }
 }
 
@@ -66,7 +72,12 @@ var locations = {
 
     map.removeLayer(markerPathLayer);
     var path = this.information.slice(0, this.currentLocation)
-    return this.placePath(path, map, markerPathLayer);
+    var layer = this.placePath(path, map, markerPathLayer);
+
+    mapMod.animateView(path, map);
+    // mapMod.openImage(path, map);
+
+    return layer;
   },
   prev: function(map, markerPathLayer){
     if(this.currentLocation === 1){
@@ -77,7 +88,12 @@ var locations = {
 
     map.removeLayer(markerPathLayer);
     var path = this.information.slice(0, this.currentLocation)
-    return this.placePath(path, map, markerPathLayer);
+    var layer = this.placePath(path, map, markerPathLayer);
+
+    mapMod.animateView(path, map);
+    // mapMod.openImage(path, map);
+
+    return layer;
   },
   all: function(map, markerPathLayer){
     if(markerPathLayer){
@@ -85,7 +101,9 @@ var locations = {
       markerPathLayer.clearLayers();
     }
     this.currentLocation = this.information.length;
-    return this.placePath(this.information, map, markerPathLayer);
+    var layer = this.placePath(this.information, map, markerPathLayer);
+    map.fitWorld();
+    return layer;
   },
   placePath: function(photos, map, layer){
     // need to massage latlongs to remove null ones and add wrapping points
@@ -95,7 +113,7 @@ var locations = {
 
     layer = L.layerGroup(markers).addLayer(polyline);
     layer.addTo(map);
-    markers[markers.length-1].openPopup();
+
     return layer
   }
 }
@@ -111,7 +129,6 @@ var generateMap = function(){
     worldCopyJump: true
   });
   mapConfig.baseLayer.addTo(map);
-  map.fitWorld();
   return map;
 }
 
