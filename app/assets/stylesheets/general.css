@@ -9,3 +9,16 @@ li.header-menu-button {
 i.ion {
   font-size: 16px;
 }
+
+.modal-dialog.share {
+  top: 35vh;
+}
+
+#public-url {
+  text-align: center;
+}
+
+.modal-dialog.share .modal-header {
+  border: none;
+  padding-bottom: 0px;
+}

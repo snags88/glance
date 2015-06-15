@@ -16,6 +16,8 @@ gem 'omniauth-instagram'
 gem 'instagram'
 gem 'friendly_id'
 
+gem 'zeroclipboard-rails'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'capybara'

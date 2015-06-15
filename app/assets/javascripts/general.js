@@ -12,6 +12,7 @@ function openSite() {
   containerGridMasonry();
   photoSorter();
   shortCodeElements();
+  addCopyListener();
 }
 
 //---------------------------------------
@@ -161,7 +162,9 @@ function jqueryUi() {
   });
 }
 
+//---------------------------------------
 // shortCode Script
+//---------------------------------------
 shortCodeElements();
 function shortCodeElements(){
     lightbox();
@@ -180,4 +183,19 @@ function shortCodeElements(){
             innerHeight: 390
         });
     };
+}
+
+//---------------------------------------
+// Copy to Clipboard
+//---------------------------------------
+
+function addCopyListener(){
+  var client = new ZeroClipboard($("#copy"))
+  client.on("copy", copyToClipboard)
+}
+
+function copyToClipboard(event) {
+  var clipboard = event.clipboardData;
+  var text = $("#public-url").text();
+  clipboard.setData("text/plain", text)
 }
