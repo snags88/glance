@@ -58,56 +58,45 @@ var locations = {
     this["information"] = arr;
   },
   next: function(map, markerPathLayer){
-    if(this.currentLocation === 0){
+    if(this.currentLocation === this.information.length){
       markerPathLayer.clearLayers();
+      this.currentLocation = 0;
     }
     this.currentLocation++;
 
     map.removeLayer(markerPathLayer);
     var path = this.information.slice(0, this.currentLocation)
-
-    var latLongs = path.map(function(){return this.latlong})
-    var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
-    var markers = path.map(function(){return this.marker})
-
-    markerPathLayer = L.layerGroup(markers).addLayer(polyline);
-    markerPathLayer.addTo(map);
-
-    return markerPathLayer;
-
+    return this.placePath(path, map, markerPathLayer);
   },
   prev: function(map, markerPathLayer){
-    if(this.currentLocation > 0){
+    if(this.currentLocation === 1){
+      this.currentLocation = this.information.length;
+    } else {
       this.currentLocation--;
-
-      map.removeLayer(markerPathLayer);
-      var path = this.information.slice(0, this.currentLocation)
-
-      var latLongs = path.map(function(){return this.latlong})
-      var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
-      var markers = path.map(function(){return this.marker})
-
-      markerPathLayer = L.layerGroup(markers).addLayer(polyline);
-      markerPathLayer.addTo(map);
     }
 
-    return markerPathLayer;
+    map.removeLayer(markerPathLayer);
+    var path = this.information.slice(0, this.currentLocation)
+    return this.placePath(path, map, markerPathLayer);
   },
   all: function(map, markerPathLayer){
     if(markerPathLayer){
-      this.currentLocation = 0;
       map.removeLayer(markerPathLayer);
       markerPathLayer.clearLayers();
     }
-
+    this.currentLocation = this.information.length;
+    return this.placePath(this.information, map, markerPathLayer);
+  },
+  placePath: function(photos, map, layer){
     // need to massage latlongs to remove null ones and add wrapping points
-    var latLongs = this.information.map(function(){return this.latlong})
+    var latLongs = photos.map(function(){return this.latlong})
     var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
-    var markers = this.information.map(function(){return this.marker})
+    var markers = photos.map(function(){return this.marker})
 
-    markerPathLayer = L.layerGroup(markers).addLayer(polyline);
-    markerPathLayer.addTo(map);
-    return markerPathLayer
+    layer = L.layerGroup(markers).addLayer(polyline);
+    layer.addTo(map);
+    markers[markers.length-1].openPopup();
+    return layer
   }
 }
 
@@ -162,4 +151,3 @@ $(function(){
 //setView( <LatLng> center,<Number> zoom?,<zoom/pan options> options? )
 //setZoom( <Number> zoom, <zoom options> options? )
 //panTo( <LatLng> latlng, <pan options> options? )
-//openPopup( <String> html | <HTMLElement> el, <LatLng> latlng, <Popup options> options? )
