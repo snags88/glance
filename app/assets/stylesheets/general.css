@@ -11,7 +11,7 @@ i.ion {
 }
 
 .modal-dialog.share {
-  top: 35vh;
+  top: 25vh;
 }
 
 #public-url {
@@ -21,4 +21,16 @@ i.ion {
 .modal-dialog.share .modal-header {
   border: none;
   padding-bottom: 0px;
+}
+
+#feedback {
+  font-size: 45px;
+  color: red;
+  top: -40px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.not-visible {
+  visibility: hidden;
 }

@@ -198,4 +198,12 @@ function copyToClipboard(event) {
   var clipboard = event.clipboardData;
   var text = $("#public-url").text();
   clipboard.setData("text/plain", text)
+  showFeedback();
+}
+
+function showFeedback(){
+  $('#feedback').removeClass('not-visible');
+  setTimeout(function(){
+    $('#feedback').addClass('not-visible');
+  }, 1000)
 }
