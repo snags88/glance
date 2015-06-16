@@ -205,5 +205,5 @@ function showFeedback(){
   $('#feedback').removeClass('not-visible');
   setTimeout(function(){
     $('#feedback').addClass('not-visible');
-  }, 1000)
+  }, 100)
 }

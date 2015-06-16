@@ -20,10 +20,7 @@ var mapConfig = {
   firstLocation: function(){
     return locations.information[0].latlong;
   },
-  lineColor: 'red',
-  panOptions: {
-    duration: 2
-  }
+  lineColor: 'red'
 }
 
 function Photo(lat, long, name, link){
@@ -34,10 +31,15 @@ function Photo(lat, long, name, link){
 }
 
 var mapMod = {
-  addToMap: function(object, map){object.addTo(map);},
   animateView: function(photos, map){
-    var coords =  photos[photos.length-1].latlong;
-    map.setView(coords, 6, {pan: mapConfig.panOptions, animate: true});
+    var origin = photos.slice(-2)[0].latlong;
+    var destination =  photos.slice(-1)[0].latlong;
+
+    var distance = Math.sqrt(Math.pow(destination.lat - origin.lat, 2) + Math.pow(destination.lng - origin.lng, 2));
+    var duration = distance / 25.0;
+
+    map.setView(destination, 6, {pan: {duration: duration}, animate: true});
+    return duration;
   },
   openImage: function(photos, map){
     var marker = photos[photos.length-1].marker;
@@ -66,16 +68,19 @@ var locations = {
   next: function(map, markerPathLayer){
     if(this.currentLocation === this.information.length){
       markerPathLayer.clearLayers();
-      this.currentLocation = 0;
+      this.currentLocation = 1;
+    } else {
+      this.currentLocation++;
     }
-    this.currentLocation++;
 
     map.removeLayer(markerPathLayer);
     var path = this.information.slice(0, this.currentLocation)
     var layer = this.placePath(path, map, markerPathLayer);
 
-    mapMod.animateView(path, map);
-    mapMod.openImage(path, map);
+    var timeout = mapMod.animateView(path, map) * 1000;
+    setTimeout(function(){
+      mapMod.openImage(path, map);
+    }, timeout);
 
     return layer;
   },
@@ -90,8 +95,10 @@ var locations = {
     var path = this.information.slice(0, this.currentLocation)
     var layer = this.placePath(path, map, markerPathLayer);
 
-    mapMod.animateView(path, map);
-    mapMod.openImage(path, map);
+    var timeout = mapMod.animateView(path, map) * 1000;
+    setTimeout(function(){
+      mapMod.openImage(path, map);
+    }, timeout);
 
     return layer;
   },
@@ -111,7 +118,7 @@ var locations = {
     var polyline = L.polyline(latLongs, {color: mapConfig.lineColor});
     var markers = photos.map(function(){return this.marker})
 
-    layer = L.layerGroup(markers).addLayer(polyline);
+    layer = L.layerGroup(markers)//.addLayer(polyline);
     layer.addTo(map);
 
     return layer
@@ -163,8 +170,3 @@ $(function(){
   });
 
 });
-
-//Map State modifications
-//setView( <LatLng> center,<Number> zoom?,<zoom/pan options> options? )
-//setZoom( <Number> zoom, <zoom options> options? )
-//panTo( <LatLng> latlng, <pan options> options? )

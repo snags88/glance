@@ -25,16 +25,21 @@
       <%= label :public_false, 'Private', class: "radio-inline custom-radio" %>
     </div>
   </div>
-  <div class="form-group">
-    <%= label_tag "Sort Photos" %>
 
-    <ul id="sortable">
-      <%- ordered_photos(album).each do |photo| -%>
-      <li class="ui-state-default sortable-photo" id="<%= photo.token %>"><%= photo.location_name %> | Order: <%= photo.order %></li>
-      <%- end -%>
-    </ul>
-    <input type="text" name="order[tokens]" id="orderSubmit">
-  </div>
+  <%- if album.title != nil -%>
+    <div class="form-group">
+      <%= label_tag "Sort Photos" %>
+
+      <div id="sortable">
+        <%- ordered_photos(album).each do |photo| -%>
+
+          <img class="ui-state-default sortable-photo" src="<%= photo.media_url %>">
+
+        <%- end -%>
+      </div>
+      <input type="text" name="order[tokens]" id="orderSubmit">
+    </div>
+  <%- end -%>
 
   <div class="spacer-15"></div>
   <%= f.submit class: "btn btn-md btn-black" %>
